@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Taskbar({ openWindows, getTitle, onTaskClick, timezone = 'Asia/Kolkata' }) {
+function Taskbar({ openWindows, activeWindow, getTitle, onTaskClick, timezone = 'Asia/Kolkata' }) {
   const [now, setNow] = useState(new Date());
 
   useEffect(() => {
@@ -38,9 +38,13 @@ function Taskbar({ openWindows, getTitle, onTaskClick, timezone = 'Asia/Kolkata'
       </button>
       <div className="taskbar-apps">
         {openWindows.map((w) => (
-          <div key={w} className="taskbar-app" onClick={() => onTaskClick(w)}>
+          <button
+            key={w}
+            className={`taskbar-app${activeWindow === w ? ' taskbar-app-active' : ''}`}
+            onClick={() => onTaskClick(w)}
+          >
             {getTitle(w)}
-          </div>
+          </button>
         ))}
       </div>
       <div className="taskbar-time">{display}</div>
