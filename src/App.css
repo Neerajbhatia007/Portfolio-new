@@ -88,8 +88,8 @@
   top: 8px;
 }
 
-.desktop-icon:hover .icon-tooltip,
-.desktop-icon:focus .icon-tooltip {
+.desktop-icon:hover ,
+.desktop-icon:focus  {
   animation: none;
   opacity: 1;
   transform: translateX(0);
