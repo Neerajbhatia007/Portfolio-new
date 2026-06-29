@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
-function Taskbar({ openWindows, activeWindow, getTitle, onTaskClick, timezone = 'Asia/Kolkata' }) {
+function Taskbar({
+  openWindows,
+  activeWindow,
+  getTitle,
+  onTaskClick,
+  apps,
+  onOpenApp,
+  profile,
+  timezone = 'Asia/Kolkata',
+}) {
   const [now, setNow] = useState(new Date());
+  const [isStartOpen, setIsStartOpen] = useState(false);
 
   useEffect(() => {
     const id = setInterval(() => setNow(new Date()), 1000);
@@ -32,7 +42,38 @@ function Taskbar({ openWindows, activeWindow, getTitle, onTaskClick, timezone = 
 
   return (
     <div className="taskbar">
-      <button className="start-button">
+      {isStartOpen && (
+        <div className="start-menu">
+          <div className="start-menu-header">
+            <strong>{profile.name}</strong>
+            <span>{profile.role}</span>
+          </div>
+          <div className="start-menu-apps">
+            {apps.map((app) => (
+              <button
+                key={app.id}
+                onClick={() => {
+                  onOpenApp(app.id);
+                  setIsStartOpen(false);
+                }}
+              >
+                <span>{app.icon}</span>
+                {app.name}
+              </button>
+            ))}
+          </div>
+          <div className="start-menu-footer">
+            <span>{profile.email}</span>
+            <span>{profile.location}</span>
+          </div>
+        </div>
+      )}
+
+      <button
+        className={`start-button${isStartOpen ? ' start-button-active' : ''}`}
+        aria-expanded={isStartOpen}
+        onClick={() => setIsStartOpen((open) => !open)}
+      >
         <span>🪟</span>
         Start
       </button>

@@ -20,3 +20,13 @@ test('taskbar app buttons switch windows without closing them', async () => {
   expect(screen.getAllByText('Neeraj Bhatia').length).toBeGreaterThan(0);
   expect(screen.getByText(/my experience & projects/i)).toBeInTheDocument();
 });
+
+test('start menu launches portfolio apps', async () => {
+  render(<App />);
+
+  await userEvent.click(screen.getByRole('button', { name: /start/i }));
+  await userEvent.click(screen.getByRole('button', { name: /contact card/i }));
+
+  expect(screen.getByText(/contact information/i)).toBeInTheDocument();
+  expect(screen.getByText(/phone:/i)).toBeInTheDocument();
+});

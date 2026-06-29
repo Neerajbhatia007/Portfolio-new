@@ -36,6 +36,8 @@
   cursor: pointer;
   user-select: none;
   width: 80px;
+  outline: none;
+  position: relative;
 }
 
 .icon-image {
@@ -56,6 +58,58 @@
 
 .desktop-icon:hover .icon-label {
   background: rgba(255, 255, 255, 0.9);
+}
+
+.icon-tooltip {
+  animation: tooltipIntro 4.5s ease-in-out forwards;
+  background: #ffffe1;
+  border: 1px solid #808080;
+  box-shadow: 2px 2px 3px rgba(0,0,0,0.35);
+  color: #1f1f1f;
+  font-size: 11px;
+  left: 86px;
+  opacity: 0;
+  padding: 5px 7px;
+  pointer-events: none;
+  position: absolute;
+  top: 12px;
+  transform: translateX(-6px);
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.icon-tooltip::before {
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid #808080;
+  border-top: 5px solid transparent;
+  content: '';
+  left: -6px;
+  position: absolute;
+  top: 8px;
+}
+
+.desktop-icon:hover .icon-tooltip,
+.desktop-icon:focus .icon-tooltip {
+  animation: none;
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 180ms ease-out, transform 180ms ease-out;
+}
+
+@keyframes tooltipIntro {
+  0% {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  14%,
+  72% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
 }
 
 .desktop-profile-card {
@@ -483,7 +537,84 @@
   display: flex;
   align-items: center;
   padding: 0 4px;
-  z-index: 1001;
+  z-index: 2000;
+}
+
+.start-menu {
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  bottom: 31px;
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.45);
+  left: 4px;
+  position: absolute;
+  width: 270px;
+}
+
+.start-menu-header {
+  background: linear-gradient(to right, #0054E3, #3D95FF);
+  color: white;
+  padding: 8px;
+}
+
+.start-menu-header strong,
+.start-menu-header span {
+  display: block;
+}
+
+.start-menu-header strong {
+  font-size: 14px;
+}
+
+.start-menu-header span {
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.start-menu-apps {
+  background: #f0f0f0;
+  border-left: 1px inset #c0c0c0;
+  border-right: 1px inset #c0c0c0;
+  padding: 5px;
+}
+
+.start-menu-apps button {
+  align-items: center;
+  background: transparent;
+  border: 1px solid transparent;
+  color: black;
+  cursor: pointer;
+  display: flex;
+  font-family: inherit;
+  font-size: 12px;
+  gap: 8px;
+  padding: 7px;
+  text-align: left;
+  width: 100%;
+}
+
+.start-menu-apps button:hover,
+.start-menu-apps button:focus {
+  background: #0054E3;
+  color: white;
+  outline: none;
+}
+
+.start-menu-apps span {
+  font-size: 18px;
+  width: 22px;
+}
+
+.start-menu-footer {
+  background: #dfdfdf;
+  border-top: 1px solid #808080;
+  color: #303030;
+  display: grid;
+  gap: 2px;
+  padding: 7px;
+}
+
+.start-menu-footer span {
+  font-size: 11px;
 }
 
 .start-button {
@@ -504,6 +635,11 @@
 
 .start-button:active {
   border: 1px inset #c0c0c0;
+}
+
+.start-button-active {
+  border: 1px inset #c0c0c0;
+  background: #dfdfdf;
 }
 
 .taskbar-apps {

@@ -244,7 +244,7 @@ function App() {
             key={windowType}
             title={title}
             path={meta.path}
-            // status={meta.status}
+            status={meta.status}
             position={meta.position}
             isActive={activeWindow === windowType}
             onFocus={() => setActiveWindow(windowType)}
@@ -260,6 +260,9 @@ function App() {
         activeWindow={activeWindow}
         getTitle={getTitle}
         onTaskClick={setActiveWindow}
+        apps={desktopIcons}
+        onOpenApp={openWindow}
+        profile={profile}
       />
     </div>
   );
